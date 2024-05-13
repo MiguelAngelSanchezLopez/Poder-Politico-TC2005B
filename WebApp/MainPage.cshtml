@@ -2,9 +2,19 @@
 @model WebApp.Pages.MainPageModel
 @using Microsoft.AspNetCore.Mvc.RazorPages
 
-<h1>Welcome to My Web App!</h1>
 
-<div>
-    <a asp-page="/Login" class="btn btn-primary">Log In</a>
-    <button type="button" class="btn btn-success">Play</button>
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Welcome to My Web App!</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+    <h1>Welcome to My Web App!</h1>
+
+    <div>
+        <a asp-page="/Login" class="btn btn-primary">Log In</a>
+        <button type="button" class="btn btn-success">Play</button>
+    </div>
+</body>
+</html>
