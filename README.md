@@ -9,6 +9,9 @@ Enter terminal in vscode : ```Ctrl + Left Shift + ` ``` <br /> <br />
 Access the right folder : ``` cd poder-politico-ui``` <br /> <br />
 Start batch job : ``` npm start ``` , and wait for the webpage render in your browser. 
 <br /><br />
+If there's a resct-scripts start problem try:
+``` npm install react-scripts --save ```
+<br /><br />
 If there's missing dependencies like React Router:
 ``` npm i -D react-router-dom ```
 <br /><br />
