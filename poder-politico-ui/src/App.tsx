@@ -1,41 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ppower from './politicalPower.jpg';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import Register from './Register';
-import { useNavigate as navigate } from 'react-router-dom';
-
-
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('home');
+
+  const handleNavigation = (page: string) => {
+    setCurrentPage(page);
+  };
 
   return (
-    <Router>
-    
     <div className="App">
-
       <header className="App-header">
-        <button onClick={(Login) => navigate()}>Log In</button>
-        <button onClick={(Register) => navigate()}>Register</button>
-
-        <Routes>
-          <Route path="login" element={<Login />} /> 
-          <Route path="register" element={<Register />} />
-        </Routes>
+        <button onClick={() => handleNavigation('login')}>Log In</button>
+        <button onClick={() => handleNavigation('register')}>Register</button>
       </header>
 
       <main className="App-Main-Content">
-      <h2>Welcome to Poder Politico!!</h2>
-      <section className='game-section'>
-      <img src={ppower} className="main-game" alt="ppower-game-menu" />
-          <button onClick={() => navigate()}>PLAY NOW</button>
-        </section>
-
-        <section className='intro'>
-          <p>This is the main content area where you can find information and interact with our services.</p>
-        </section>
-
+        {currentPage === 'home' && (
+          <>
+            <h2>Welcome to Poder Politico!!</h2>
+            <section className='game-section'>
+              <img src={ppower} className="main-game" alt="ppower-game-menu" />
+              <button>PLAY NOW</button>
+            </section>
+            <section className='intro'>
+              <p>This is the main content area where you can find information and interact with our services.</p>
+            </section>
+          </>
+        )}
+        {currentPage === 'login' && <Login />}
+        {currentPage === 'register' && <Register />}
       </main>
 
       <footer className="App-footer">
@@ -58,7 +55,6 @@ function App() {
         </div>
       </footer>
     </div>
-    </Router>
   );
 }
 
