@@ -32,13 +32,16 @@ const config = {
       console.log('Connected to the database');
     }
   });
+ */
+
+  // Server response and console log messages
   app.get('/', (req, res) => {
     res.send('Hello, this is my Express server!');
   });
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
-  */
+ 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
