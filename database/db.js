@@ -1,0 +1,24 @@
+// TODO: DATABASE CONFIGURATION
+/*
+const config = {
+    user: 'your_username',
+    password: 'your_password',
+    // Notice public keyword in the connection string 
+    // if you were to host this server on Azure you wouldn't need the public part
+    server: 'free-sql-mi.public.daff4276.database.windows.net',
+    database: 'ticket-app',
+    options: {
+      // THIS IS VERY IMPORTANT - Public endpoint is 3342, default is 1443
+      port: 3342, 
+      encrypt: true,
+    },
+  };
+  // Connect to the database
+  sql.connect(config, (err) => {
+    if (err) {
+      console.error('Database connection failed:', err);
+    } else {
+      console.log('Connected to the database');
+    }
+  });
+ */
