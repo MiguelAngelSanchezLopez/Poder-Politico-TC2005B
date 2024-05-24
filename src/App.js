@@ -3,21 +3,41 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
+<div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button><a href='Login.js'>Log In</a></button> {/* Aqui no jalan los links por ahora */}
+        <button><a href='Register.js'>Register</a></button> {/* Aqui no jalan los links por ahora */}
       </header>
+
+      <main className="App-Main-Content">
+            <h2>Welcome to Poder Politico!!</h2>
+            <section className='game-section'>
+              <img src={logo} className="main-game" alt="ppower-game-menu" />
+              <button>PLAY NOW</button>
+            </section>
+            <section className='intro'>
+              <p>This is the main content area where you can find information and interact with our services.</p>
+            </section>
+      </main>
+      <footer className="App-footer">
+        <div className="footer-menu">
+          <h3>Menu</h3>
+          {/* Add menu items here */}
+        </div>
+        <div className="footer-title">
+          <h3>Website Title</h3>
+        </div>
+        <div className="footer-social">
+          <h3>Contact & Social Media</h3>
+          {/* Add contact info and social media links here */}
+          <span>Email: example@example.com</span>
+          <div className="social-icons">
+            <a href="#"><i className="fab fa-facebook"></i></a>
+            <a href="#"><i className="fab fa-twitter"></i></a>
+            {/* Add more social media icons */}
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
