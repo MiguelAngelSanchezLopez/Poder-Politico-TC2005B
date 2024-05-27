@@ -83,6 +83,16 @@ main.App-Main-Content button {
   width: 15vh;
 }
 
+.login-register-container {
+  width: 100%;
+  min-height: 40vh;
+  background-color: aqua;
+  
+  display: grid;
+  place-items: center;
+
+}
+
 .App-footer {
   min-height: 15;
   

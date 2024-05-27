@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
 
+const sql = require('mssql');
+
 const PORT = process.env.PORT || 3000;
 app.get('/', (req, res) => {
   res.send('Hello, this is my Express server!');
 });
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server is running on port ${3000}`);
 });
 
 const bodyParser = require('body-parser');
@@ -42,7 +44,7 @@ var Connection = require('tedious').Connection;
     connection.on('connect', function(err) {  
         // If no error, then good to proceed.  
         console.log("Connected");  
-        executeStatement();  
+        // executeStatement();  
     });  
     
     connection.connect();
@@ -79,3 +81,29 @@ var Connection = require('tedious').Connection;
         });
         connection.execSql(request);  
     }
+// Logn route
+app.post('/src/Login.js', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+      let pool = await sql.connect(dbConfig);
+      let result = await pool.request()
+          .input('email', sql.VarChar, email)
+          .input('password', sql.VarChar, password) // Consider hashing passwords
+          .query('SELECT * FROM Users WHERE email = @email AND password = @password');
+
+      if (result.recordset.length > 0) {
+          res.json({ message: 'Login successful' });
+      } else {
+          res.status(401).json({ message: 'Invalid email or password' });
+      }
+  } catch (err) {
+      console.error('Database connection error:', err);
+      res.status(500).json({ message: 'Internal server error' });
+  }
+});
+
+// Start the server
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${3000}`);
+});
