@@ -1,3 +1,5 @@
+// App.js file in poder-politico-tc2005B/src/App.js
+
 import logo from './PP.jpg';
 import './App.css';
 import Login from './Login.js';
