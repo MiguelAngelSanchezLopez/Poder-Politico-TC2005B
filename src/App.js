@@ -5,6 +5,7 @@ import './App.css';
 import Login from './Login.js';
 import Register from './Register.js';
 
+
 function App() {
   return (
 <div className="App">
@@ -17,7 +18,7 @@ function App() {
             <h2>Welcome to Poder Politico!!</h2>
             <section className='game-section'>
               <img src={logo} className="main-game" alt="ppower-game-menu" />
-              <button>PLAY NOW</button>
+              {/* <button>PLAY NOW</button> */}
             </section>
             <section className='intro'>
               <p>This is the main content area where you can find information and interact with our services.</p>
@@ -52,4 +53,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

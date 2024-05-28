@@ -1,11 +1,12 @@
-// Login.js file in poder-politico-tc2005B/src/Login.js
 import './Login.css';
 import React, { useState } from 'react';
+import MainPage from './MainPage';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -25,11 +26,17 @@ function Login() {
             if (response.ok) {
                 // Handle successful login (e.g., redirect, save token)
                 console.log('Login successful:', data);
+                setIsLoggedIn(true);  // Set login status to true
             } else {
                 setError(data.message || 'Login failed');
             }
         } catch (error) {
             setError('An error occurred. Please try again.');
+        }
+    
+
+        if (isLoggedIn === true) {
+            return <MainPage />;
         }
     };
 
@@ -58,7 +65,7 @@ function Login() {
                         onChange={(e) => setPassword(e.target.value)}
                     />
                 </div>
-                <button type="submit">Login</button>
+                <button type="submit" onClick={handleSubmit}>Login</button>
             </form>
         </div>
     );
