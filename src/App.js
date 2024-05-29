@@ -1,4 +1,4 @@
-// App.js file in poder-politico-tc2005B/src/App.js
+// App.js file in poder-politico-tc2005B/src
 import React, { useContext, useRef } from 'react';
 import logo from './PP.jpg';
 import './App.css';
@@ -24,6 +24,8 @@ function AppContent() {
   const scrollToRegister = () => {
     registerRef.current.scrollIntoView({ behavior: 'smooth' });
   };
+
+
 
 
   return (
