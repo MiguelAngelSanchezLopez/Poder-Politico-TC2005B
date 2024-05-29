@@ -1,6 +1,6 @@
 import './Login.css';
 import React, { useState } from 'react';
-import MainPage from './MainPage';
+// import MainPage from './AuthContext';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -36,9 +36,9 @@ function Login() {
         }
     
 
-        if (isLoggedIn === true) {
-            return <MainPage />;
-        }
+        // if (isLoggedIn === true) {
+        //     return <MainPage />;
+        // }
     };
 
     return (

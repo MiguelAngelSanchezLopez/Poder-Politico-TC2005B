@@ -1,12 +1,18 @@
 // App.js file in poder-politico-tc2005B/src/App.js
-
+import React, { useContext } from 'react';
 import logo from './PP.jpg';
 import './App.css';
 import Login from './Login.js';
 import Register from './Register.js';
+import { AuthContext, AuthProvider } from './AuthContext';
 
 
-function App() {
+function AppContent() {
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+  };
   return (
 <div className="App">
       <header className="App-header">
@@ -23,12 +29,14 @@ function App() {
             <section className='intro'>
               <p>This is the main content area where you can find information and interact with our services.</p>
             </section>
-
-        <div className="login-register-container">
-          <div className='right'> <Login /> </div>
-          <div className='left'> <Register /></div>
-        </div>
-
+            {!isAuthenticated ? (
+          <div className="login-register-container">
+            <div className='right'><Login /></div>
+            <div className='left'><Register /></div>
+          </div>
+        ) : (
+          <button><a href='some-other-page'>Go to Another Page</a></button>
+        )}
       </main>
       <footer className="App-footer">
         <div className="footer-menu">
@@ -50,6 +58,15 @@ function App() {
         </div>
       </footer>
     </div>
+  );
+}
+
+
+function App() {
+  return (
+    <AuthProvider>
+      <AppContent />
+    </AuthProvider>
   );
 }
 
