@@ -2,8 +2,8 @@ import './Register.css';
 import React, { useState } from 'react';
 
 function Register() {
+
     const [name, setName] = useState('');
-    const [surname, setSurname] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -20,7 +20,7 @@ function Register() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, surname, email, password }),
+                body: JSON.stringify({ name, email, password }),
             });
 
             const data = await response.json();
@@ -29,7 +29,6 @@ function Register() {
                 setSuccess('Registration successful');
                 // Reset form fields
                 setName('');
-                setSurname('');
                 setEmail('');
                 setPassword('');
             } else {
@@ -54,17 +53,6 @@ function Register() {
                         name="Name" 
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        required 
-                    />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="Surname">Surname:</label>
-                    <input 
-                        type="text" 
-                        id="Surname" 
-                        name="Surname" 
-                        value={surname}
-                        onChange={(e) => setSurname(e.target.value)}
                         required 
                     />
                 </div>

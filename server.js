@@ -83,7 +83,7 @@ app.post('/api/login', (req, res) => {
 
 // Register route
 app.post('/api/register', (req, res) => {
-  const { name, surname, email, password } = req.body;
+  const { name, email, password } = req.body;
 
   const connection = new Connection(dbConfig);
 
@@ -93,7 +93,7 @@ app.post('/api/register', (req, res) => {
       return res.status(500).json({ message: 'Internal server error' });
     }
 
-    const query = 'INSERT INTO Usuario (Nombre, Apellido, Correo, contrasenia) VALUES (@Nombre, @Apellido, @Correo, @contrasenia)';
+    const query = 'INSERT INTO Usuario (Nombre, contrasenia, Correo) VALUES ( @Nombre, @contrasenia, @Correo) ';
     const request = new Request(query, (err) => {
       if (err) {
         console.error('SQL error:', err);
@@ -105,7 +105,6 @@ app.post('/api/register', (req, res) => {
     });
 
     request.addParameter('Nombre', TYPES.VarChar, name);
-    request.addParameter('Apellido', TYPES.VarChar, surname);
     request.addParameter('Correo', TYPES.VarChar, email);
     request.addParameter('Contrasenia', TYPES.VarChar, password);
 

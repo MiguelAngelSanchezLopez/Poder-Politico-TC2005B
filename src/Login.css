@@ -5,32 +5,40 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    min-height: 70vh; /* Use min-height for better adaptability */
+    padding: 20px; /* Add some padding */
 }
-  
+
 .login-form {
-    width: 300px;
+    width: 90%; /* Make the form width responsive */
+    max-width: 400px; /* Limit the maximum width */
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add subtle shadow for better visibility */
 }
-  
+
 .form-group {
     margin-bottom: 15px;
+    width: 100%; /* Ensure form groups take full width */
 }
-  
+
 label {
     font-weight: bold;
+    display: block; /* Ensure labels are block elements for consistent spacing */
+    margin-bottom: 5px; /* Add some space below labels */
 }
-  
+
 input[type="email"],
 input[type="password"] {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    box-sizing: border-box; /* Ensure padding does not affect the width */
 }
-  
+
 button {
     width: 100%;
     padding: 10px;
@@ -39,8 +47,22 @@ button {
     background-color: #007bff;
     color: aquamarine;
     cursor: pointer;
+    font-size: 16px; /* Ensure button text is readable */
+    transition: background-color 0.3s; /* Smooth transition for hover effect */
 }
 
 button:hover {
     background-color: #0056b3;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .login-form {
+        width: 100%; /* Full width on small screens */
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+
+    button {
+        font-size: 14px; /* Slightly smaller font for buttons on small screens */
+    }
 }

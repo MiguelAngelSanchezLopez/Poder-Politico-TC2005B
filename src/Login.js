@@ -6,6 +6,7 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleSubmit = async (event) => {
@@ -25,7 +26,7 @@ function Login() {
 
             if (response.ok) {
                 // Handle successful login (e.g., redirect, save token)
-                console.log('Login successful:', data);
+                setSuccess('Login successful');
                 setIsLoggedIn(true);  // Set login status to true
             } else {
                 setError(data.message || 'Login failed');
