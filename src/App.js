@@ -1,5 +1,5 @@
 // App.js file in poder-politico-tc2005B/src/App.js
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import logo from './PP.jpg';
 import './App.css';
 import Login from './Login.js';
@@ -8,16 +8,36 @@ import { AuthContext, AuthProvider } from './AuthContext';
 
 
 function AppContent() {
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  // Session auth and LogOut
+  const { isAuthenticated, setIsAuthenticated } = React.useContext(AuthContext);
 
   const handleLogout = () => {
-    setIsAuthenticated(false);
+      setIsAuthenticated(false);
   };
+  // References mngmnt
+  const loginRef = useRef(null);
+  const registerRef = useRef(null);
+
+  const scrollToLogin = () => {
+    loginRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+  const scrollToRegister = () => {
+    registerRef.current.scrollIntoView({ behavior: 'smooth' });
+  };
+
+
   return (
-<div className="App">
+
+    <div className="App">
       <header className="App-header">
-        <button><a href='Login.js'>Log In</a></button> {/* Aqui no jalan los links por ahora */}
-        <button><a href='Register.js'>Register</a></button> {/* Aqui no jalan los links por ahora */}
+        {!isAuthenticated ?  (
+        <>
+          <button onClick={scrollToLogin}>Log In</button>
+          <button onClick={scrollToRegister}>Register</button>
+        </>
+      ) : (
+          <button onClick={handleLogout}> Logout </button>
+      )}
       </header>
 
       <main className="App-Main-Content">
@@ -30,12 +50,12 @@ function AppContent() {
               <p>This is the main content area where you can find information and interact with our services.</p>
             </section>
             {!isAuthenticated ? (
-          <div className="login-register-container">
-            <div className='right'><Login /></div>
-            <div className='left'><Register /></div>
-          </div>
+              <div className="login-register-container">
+                <div className='right' ref={loginRef}><Login /></div>
+                <div className='left' ref={registerRef}><Register /></div>
+              </div>
         ) : (
-          <button><a href='some-other-page'>Go to Another Page</a></button>
+            <button><a href='some-other-page'>Go to Another Page</a></button>
         )}
       </main>
       <footer className="App-footer">

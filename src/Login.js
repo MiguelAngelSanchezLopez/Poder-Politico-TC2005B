@@ -1,13 +1,13 @@
 import './Login.css';
-import React, { useState } from 'react';
-// import MainPage from './AuthContext';
+import React, { useState, useContext } from 'react';
+import { AuthContext } from './AuthContext'; // Import AuthContext component
 
 function Login() {
+    const {setIsAuthenticated } = useContext(AuthContext);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -27,24 +27,19 @@ function Login() {
             if (response.ok) {
                 // Handle successful login (e.g., redirect, save token)
                 setSuccess('Login successful');
-                setIsLoggedIn(true);  // Set login status to true
+                setIsAuthenticated(true); // Global auth confirmed
             } else {
                 setError(data.message || 'Login failed');
             }
         } catch (error) {
             setError('An error occurred. Please try again.');
         }
-    
-
-        // if (isLoggedIn === true) {
-        //     return <MainPage />;
-        // }
     };
-
     return (
         <div className="login-container">
             <h2>Login</h2>
             {error && <p className="error">{error}</p>}
+            {success && <p className="success">{success}</p>}
             <form className="login-form" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <label htmlFor="email">Email:</label>
