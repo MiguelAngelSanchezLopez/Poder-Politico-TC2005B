@@ -114,8 +114,8 @@ header.App-header button:hover {
 }
 
 .main-game {
-  /* width: 90%; */
-  width: 300px;
+  width: 90%;
+  /* width: 300px; */
   height: auto;
   border-radius: 20px;
 }
