@@ -25,9 +25,6 @@ function AppContent() {
     registerRef.current.scrollIntoView({ behavior: 'smooth' });
   };
 
-
-
-
   return (
 
     <div className="App">
@@ -38,8 +35,11 @@ function AppContent() {
           <button onClick={scrollToRegister}>Register</button>
         </>
       ) : (
-          <button onClick={handleLogout}> Logout </button>
+        <div className="logout-container">
+          <button className="logout-button" onClick={handleLogout}>Logout</button>
+        </div>
       )}
+      
       </header>
 
       <main className="App-Main-Content">

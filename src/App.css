@@ -68,6 +68,22 @@ header.App-header button:hover {
   color: #21355c;
 }
 
+.logout-container {
+  width: 20%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logout-button {
+  background-color: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+
 @media (max-width: 768px) {
   .App-header {
     flex-direction: column;
@@ -98,8 +114,24 @@ header.App-header button:hover {
 }
 
 .main-game {
-  width: 90%;
+  /* width: 90%; */
+  width: 300px;
+  height: auto;
   border-radius: 20px;
+}
+
+.main-game-logged-in {
+  width: 150px;
+}
+
+.game-start-button {
+  margin: 20px;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
 }
 
 .App-Main-Content h2 {

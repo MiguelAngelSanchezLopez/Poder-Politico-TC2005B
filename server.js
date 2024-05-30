@@ -57,7 +57,7 @@ app.post('/api/login', (req, res) => {
       return res.status(500).json({ message: 'Internal server error' });
     }
 
-    const query = 'SELECT * FROM Usuario WHERE Correo = @Correo AND contrasenia = @contrasenia';
+    const query = 'SELECT * FROM Usuarios WHERE correo = @correo AND contrasenia = @contrasenia';
     const request = new Request(query, (err, rowCount, rows) => {
       if (err) {
         console.error('SQL error:', err);
@@ -72,7 +72,7 @@ app.post('/api/login', (req, res) => {
       connection.close();
     });
 
-    request.addParameter('Correo', TYPES.VarChar, email);
+    request.addParameter('correo', TYPES.VarChar, email);
     request.addParameter('contrasenia', TYPES.VarChar, password);
 
     connection.execSql(request);
@@ -93,7 +93,7 @@ app.post('/api/register', (req, res) => {
       return res.status(500).json({ message: 'Internal server error' });
     }
 
-    const query = 'INSERT INTO Usuario (Nombre, contrasenia, Correo) VALUES ( @Nombre, @contrasenia, @Correo) ';
+    const query = 'INSERT INTO Usuarios (nombre, contrasenia, correo) VALUES ( @nombre, @contrasenia, @correo) ';
     const request = new Request(query, (err) => {
       if (err) {
         console.error('SQL error:', err);
@@ -104,9 +104,9 @@ app.post('/api/register', (req, res) => {
       connection.close();
     });
 
-    request.addParameter('Nombre', TYPES.VarChar, name);
-    request.addParameter('Correo', TYPES.VarChar, email);
-    request.addParameter('Contrasenia', TYPES.VarChar, password);
+    request.addParameter('nombre', TYPES.VarChar, name);
+    request.addParameter('correo', TYPES.VarChar, email);
+    request.addParameter('contrasenia', TYPES.VarChar, password);
 
     connection.execSql(request);
   });
