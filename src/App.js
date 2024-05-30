@@ -5,7 +5,7 @@ import './App.css';
 import Login from './Login.js';
 import Register from './Register.js';
 import { AuthContext, AuthProvider } from './AuthContext';
-
+import interpretacionGrafica from './solucionAI.js';
 
 function AppContent() {
   // Session auth and LogOut

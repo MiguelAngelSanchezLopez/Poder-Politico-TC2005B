@@ -47,6 +47,7 @@
   },
   "proxy": "http://localhost:3001",
   "devDependencies": {
-    "gh-pages": "^6.1.1"
+    "gh-pages": "^6.1.1",
+    "terser-webpack-plugin": "^5.3.10"
   }
 }
