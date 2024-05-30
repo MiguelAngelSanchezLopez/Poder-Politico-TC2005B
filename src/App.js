@@ -5,7 +5,7 @@ import './App.css';
 import Login from './Login.js';
 import Register from './Register.js';
 import { AuthContext, AuthProvider } from './AuthContext';
-import interpretacionGrafica from './solucionAI.js';
+// import interpretacionGrafica from './solucionAI.js';
 
 function AppContent() {
   // Session auth and LogOut
@@ -49,15 +49,17 @@ function AppContent() {
               {/* <button>PLAY NOW</button> */}
             </section>
             <section className='intro'>
-              <p>This is the main content area where you can find information and interact with our services.</p>
+              {/* <p><div className='a_i'><interpretacionGrafica /></div></p> */}
             </section>
             {!isAuthenticated ? (
               <div className="login-register-container">
                 <div className='right' ref={loginRef}><Login /></div>
                 <div className='left' ref={registerRef}><Register /></div>
               </div>
+              
         ) : (
-            <button><a href='some-other-page'>Go to Another Page</a></button>
+            <button><a href='https://peltre.itch.io/political-power'>Get started the game!</a></button>
+            
         )}
       </main>
       <footer className="App-footer">

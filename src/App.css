@@ -1,5 +1,4 @@
 /* App.css */
-
 /* General */
 
 .App {
@@ -56,12 +55,12 @@ header.App-header button {
   font-size: calc(5px + 2vmin);
   color: #21355c;
   background-color: #ffffff;
-  border: 2px solid white; /* Correct border style */
+  border: 2px solid white; 
   border-radius: 20px;
-  padding: 10px 20px; /* Adjust padding */
+  padding: 10px 20px;
   margin: 0 15px;
   cursor: pointer;
-  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover */
+  transition: background-color 0.3s, color 0.3s; 
 }
 
 header.App-header button:hover {
@@ -69,19 +68,18 @@ header.App-header button:hover {
   color: #21355c;
 }
 
-/* Media query for smaller screens */
 @media (max-width: 768px) {
   .App-header {
-    flex-direction: column; /* Stack elements vertically */
-    align-items: flex-start; /* Align items to the start */
+    flex-direction: column;
+    align-items: flex-start; 
   }
 
   header.App-header nav {
-    margin-top: 10px; /* Add some spacing */
+    margin-top: 10px; 
   }
 
   header.App-header button {
-    margin-top: 10px; /* Add some spacing */
+    margin-top: 10px; 
   }
 }
 
