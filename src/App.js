@@ -18,6 +18,16 @@ function AppContent() {
   const loginRef = useRef(null);
   const registerRef = useRef(null);
 
+  const handleLoginSuccess = () => {
+    // Clear login form inputs
+    loginRef.current.resetForm();
+  };
+
+  const handleRegisterSuccess = () => {
+    // Clear register form inputs
+    registerRef.current.resetForm();
+  };
+
   const scrollToLogin = () => {
     loginRef.current.scrollIntoView({ behavior: 'smooth' });
   };

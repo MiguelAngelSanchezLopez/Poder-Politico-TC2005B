@@ -28,6 +28,9 @@ function Login() {
                 // Handle successful login (e.g., redirect, save token)
                 setSuccess('Login successful');
                 setIsAuthenticated(true); // Global auth confirmed
+                setEmail('');
+                setPassword('');
+
             } else {
                 setError(data.message || 'Login failed');
             }
