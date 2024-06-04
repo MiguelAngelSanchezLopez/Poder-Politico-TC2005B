@@ -1,0 +1,226 @@
+/* App.css */
+/* General */
+
+.App {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+/* HEADER */
+
+.App-header {
+  background-color: #21355c; /* Add background color */
+  border-bottom: 2px solid #21355c;
+  min-height: 10vh; /* Increase height for better visibility */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; /* Distribute space between elements */
+  padding: 0 20px; /* Add horizontal padding */
+  font-family: 'Roboto', sans-serif;
+  font-size: calc(10px + 2vmin);
+  color: #f9f9f9; /* Correct color code */
+}
+
+header.App-header .logo {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+header.App-header nav {
+  display: flex;
+  align-items: center;
+}
+
+header.App-header nav a {
+  color: #f9f9f9;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: calc(8px + 2vmin);
+  transition: color 0.3s;
+}
+
+header.App-header nav a:hover {
+  color: #00BFFF; /* Change color on hover */
+}
+
+header.App-header button {
+  font-size: calc(5px + 2vmin);
+  color: #21355c;
+  background-color: #ffffff;
+  border: 2px solid white; 
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin: 0 15px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; 
+}
+
+header.App-header button:hover {
+  background-color: #00BFFF;
+  color: #21355c;
+}
+
+.logout-container {
+  width: 20%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.logout-button {
+  background-color: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+  .App-header {
+    flex-direction: column;
+    align-items: flex-start; 
+  }
+
+  header.App-header nav {
+    margin-top: 10px; 
+  }
+
+  header.App-header button {
+    margin-top: 10px; 
+  }
+}
+
+/* MAIN */
+
+.App-Main-Content {
+  background-color: f9f9f9;
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  font-size: calc(10px + 2vmin);
+  color: #21355c;
+}
+
+.main-game {
+  width: 90%;
+  /* width: 300px; */
+  height: auto;
+  border-radius: 20px;
+}
+
+.main-game-logged-in {
+  width: 150px;
+}
+
+.game-start-button {
+  margin: 20px;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.App-Main-Content h2 {
+  align-self: flex-start;
+  align-self: center;
+}
+
+.game-section {
+  background-color: f9f9f9;
+  width: 100%;
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro {
+  background-color: f9f9f9;
+  width: 100%;
+  min-height: 50vh;
+  display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+main.App-Main-Content button {
+  font-size: calc(5px + 2vmin);
+  color: #21355c;
+  background-color: #f9f9f9;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 15px;
+  width: 15vh;
+}
+
+.login-register-container {
+  width: 100%;
+  min-height: 40vh;
+  background-color: whitesmoke;
+  display: flex;
+  flex-direction: row; /* Default to row for side-by-side */
+  justify-content: center; /* Center the content horizontally */
+  align-items: flex-start; /* Align items to the top */
+  gap: 20px; /* Add some space between the two divs */
+  padding: 20px;
+}
+
+.login-register-container .right,
+.login-register-container .left {
+  flex: 1; /* Allow the divs to take up equal space */
+  background-color: white; /* Optional: Add background color for better visibility */
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for a subtle effect */
+  border-radius: 10px; /* Optional: Rounded corners */
+}
+
+@media (max-width: 768px) {
+  .login-register-container {
+    flex-direction: column; /* Stack the divs on top of each other on smaller screens */
+    align-items: center; /* Center the items */
+  }
+
+  .login-register-container .right,
+  .login-register-container .left {
+    width: 100%; /* Make the divs take full width */
+    max-width: 400px; /* Optional: Limit the max width for better readability */
+  }
+}
+
+/* FOOTER */
+
+.App-footer {
+  min-height: 15;
+  
+}
+
+footer.App-footer div {
+  flex: 1;
+}
+
+footer.App-footer h3 {
+  margin-bottom: 10px;
+  font-size: calc(5px + 2vmin);
+  color: #21355c;
+}
+
+.social-icons a {
+  color: white;
+  margin-right: 10px;
+  font-size: 1.5em;
+}
