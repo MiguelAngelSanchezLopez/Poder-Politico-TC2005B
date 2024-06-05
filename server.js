@@ -46,7 +46,7 @@ connection.on('connect', function(err) {
 connection.connect();
 
 // Login route
-app.post('/api/login', (req, res) => {
+app.post('https://poder-politico.vercel.app/login', (req, res) => {
   const { email, password } = req.body;
 
   const connection = new Connection(dbConfig);
@@ -82,7 +82,7 @@ app.post('/api/login', (req, res) => {
 });
 
 // Register route
-app.post('/api/register', (req, res) => {
+app.post('https://poder-politico.vercel.app/register', (req, res) => {
   const { name, email, password } = req.body;
 
   const connection = new Connection(dbConfig);
