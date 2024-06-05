@@ -1,3 +1,5 @@
+// /api/server.js
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -5,7 +7,7 @@ const morgan = require('morgan');
 const { Connection, Request, TYPES } = require('tedious');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000; // only for local development!! 
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -36,12 +38,14 @@ var config = require('tedious').Connection;
         }
     }; 
 
-var connection = new Connection(dbConfig);  
-connection.on('connect', function(err) {  
-    // If no error, then good to proceed.  
-    console.log("Connected");  
-    // executeStatement();  
-}); 
+const connection = new Connection(dbConfig);  
+connection.on('connect', (err) => {  
+  if (err) {
+    console.error('Database connection error:', err);
+  } else {
+    console.log("Connected");
+  }
+});  
 
 connection.connect();
 
@@ -114,8 +118,4 @@ app.post('/api/register', (req, res) => {
   connection.connect();
 });
 
-
-// Start the server
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+module.exports = app;
