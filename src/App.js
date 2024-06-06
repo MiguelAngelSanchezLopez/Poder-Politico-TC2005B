@@ -85,8 +85,8 @@ function AppContent() {
           {/* Add contact info and social media links here */}
           <span>Email: example@example.com</span>
           <div className="social-icons">
-            <a href="#"><i className="fab fa-facebook"></i></a>
-            <a href="#"><i className="fab fa-twitter"></i></a>
+            <a href=""><i className="fab fa-facebook"></i></a>
+            <a href=""><i className="fab fa-twitter"></i></a>
             {/* Add more social media icons */}
           </div>
         </div>
