@@ -1,5 +1,3 @@
-// /api/server.js
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -7,7 +5,6 @@ const morgan = require('morgan');
 const { Connection, Request, TYPES } = require('tedious');
 
 const app = express();
-// const PORT = process.env.PORT || 3000; // only for local development!! 
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -21,31 +18,29 @@ app.get('/', (req, res) => {
 });
 
 // MS SQL Server configuration
-var config = require('tedious').Connection;  
-    var dbConfig = {  
-        server: 'basedatospoliticalpower.database.windows.net',  
-        authentication: {
-            type: 'default',
-            options: {
-                userName: 'administrador', 
-                password: 'Te$91827364'  
-            }
-        },
-        options: {
-            // Microsoft Azure so we need encryption:
-            encrypt: true,
-            database: 'PoliticalPowerDataBase'
-        }
-    }; 
+const dbConfig = {
+  server: 'basedatospoliticalpower.database.windows.net',
+  authentication: {
+    type: 'default',
+    options: {
+      userName: 'administrador',
+      password: 'Te$91827364'
+    }
+  },
+  options: {
+    encrypt: true,
+    database: 'PoliticalPowerDataBase'
+  }
+};
 
-const connection = new Connection(dbConfig);  
-connection.on('connect', (err) => {  
+const connection = new Connection(dbConfig);
+connection.on('connect', (err) => {
   if (err) {
     console.error('Database connection error:', err);
   } else {
-    console.log("Connected");
+    console.log('Connected');
   }
-});  
+});
 
 connection.connect();
 
@@ -54,7 +49,6 @@ app.post('/api/login', (req, res) => {
   const { email, password } = req.body;
 
   const connection = new Connection(dbConfig);
-
   connection.on('connect', (err) => {
     if (err) {
       console.error('Database connection error:', err);
@@ -67,7 +61,7 @@ app.post('/api/login', (req, res) => {
         console.error('SQL error:', err);
         return res.status(500).json({ message: 'Internal server error' });
       }
-      
+
       if (rowCount > 0) {
         res.json({ message: 'Login successful' });
       } else {
@@ -90,14 +84,13 @@ app.post('/api/register', (req, res) => {
   const { name, email, password } = req.body;
 
   const connection = new Connection(dbConfig);
-
   connection.on('connect', (err) => {
     if (err) {
       console.error('Database connection error:', err);
       return res.status(500).json({ message: 'Internal server error' });
     }
 
-    const query = 'INSERT INTO Usuarios (nombre, contrasenia, correo) VALUES ( @nombre, @contrasenia, @correo) ';
+    const query = 'INSERT INTO Usuarios (nombre, contrasenia, correo) VALUES (@nombre, @contrasenia, @correo)';
     const request = new Request(query, (err) => {
       if (err) {
         console.error('SQL error:', err);
