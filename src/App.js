@@ -4,7 +4,7 @@ import logo from './PP.jpg';
 import './App.css';
 import Login from './Login.js';
 import Register from './Register.js';
-import { AuthContext, AuthProvider, useContext } from './AuthContext';
+import { AuthContext, AuthProvider } from './AuthContext';
 // import interpretacionGrafica from './solucionAI.js';
 
 function AppContent() {
