@@ -18,15 +18,15 @@ function AppContent() {
   const loginRef = useRef(null);
   const registerRef = useRef(null);
 
-  const handleLoginSuccess = () => {
-    // Clear login form inputs
-    loginRef.current.resetForm();
-  };
+  // const handleLoginSuccess = () => {
+  //   // Clear login form inputs
+  //   loginRef.current.resetForm();
+  // };
 
-  const handleRegisterSuccess = () => {
-    // Clear register form inputs
-    registerRef.current.resetForm();
-  };
+  // const handleRegisterSuccess = () => {
+  //   // Clear register form inputs
+  //   registerRef.current.resetForm();
+  // };
 
   const scrollToLogin = () => {
     loginRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -85,8 +85,8 @@ function AppContent() {
           {/* Add contact info and social media links here */}
           <span>Email: example@example.com</span>
           <div className="social-icons">
-            <a href="#"><i className="fab fa-facebook"></i></a>
-            <a href="#"><i className="fab fa-twitter"></i></a>
+            <a href=""><i className="fab fa-facebook"></i></a>
+            <a href=""><i className="fab fa-twitter"></i></a>
             {/* Add more social media icons */}
           </div>
         </div>
