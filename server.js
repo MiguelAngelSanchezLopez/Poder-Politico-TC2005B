@@ -45,7 +45,7 @@ connection.on('connect', (err) => {
 connection.connect();
 
 // Login route
-app.post('https://poder-politico.vercel.app/api/login', (req, res) => {
+app.post('http://poder-politico-tc-2005-b-8dy6.vercel.app/api/login', (req, res) => {
   const { email, password } = req.body;
 
   const connection = new Connection(dbConfig);
@@ -80,7 +80,7 @@ app.post('https://poder-politico.vercel.app/api/login', (req, res) => {
 });
 
 // Register route
-app.post('https://poder-politico.vercel.apps/api/register', (req, res) => {
+app.post('http://poder-politico-tc-2005-b-8dy6.vercel.app/api/register', (req, res) => {
   const { name, email, password } = req.body;
 
   const connection = new Connection(dbConfig);

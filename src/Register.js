@@ -15,7 +15,7 @@ function Register() {
         setSuccess('');
 
         try {
-            const response = await fetch('https://poder-politico.vercel.app/api/register', {
+            const response = await fetch('http://poder-politico-tc-2005-b-8dy6.vercel.app/api/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

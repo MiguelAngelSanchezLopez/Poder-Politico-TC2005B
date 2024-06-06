@@ -14,7 +14,7 @@ function Login() {
         setError('');
         
         try {
-            const response = await fetch('https://poder-politico.vercel.app/api/login', {
+            const response = await fetch('http://poder-politico-tc-2005-b-8dy6.vercel.app/api/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
