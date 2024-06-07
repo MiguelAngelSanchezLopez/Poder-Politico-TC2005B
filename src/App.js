@@ -1,10 +1,10 @@
-// App.js file in poder-politico-tc2005B/src
 import React, { useRef } from 'react';
 import logo from './PP.jpg';
 import './App.css';
 import Login from './Login.js';
 import Register from './Register.js';
 import { AuthContext, AuthProvider } from './AuthContext';
+import InterpretacionGrafica from './solucionAI.js'; // Corrected import name
 
 function AppContent() {
   // Session auth and LogOut
@@ -54,7 +54,10 @@ function AppContent() {
             <div className='left' ref={registerRef}><Register /></div>
           </div>
         ) : (
-          <button><a href='https://peltre.itch.io/political-power'>Get started the game!</a></button>
+          <>
+            <button><a href='https://peltre.itch.io/political-power'>Get started the game!</a></button>
+            <div> <InterpretacionGrafica />  </div> {/* Rendering the AI component here */}
+          </>
         )}
       </main>
       <footer className="App-footer">

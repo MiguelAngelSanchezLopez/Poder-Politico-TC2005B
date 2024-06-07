@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const { Connection, Request, TYPES } = require('tedious');
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -18,37 +19,38 @@ app.get('/', (req, res) => {
 });
 
 // MS SQL Server configuration
-const dbConfig = {
-  server: 'basedatospoliticalpower.database.windows.net',
-  authentication: {
-    type: 'default',
-    options: {
-      userName: 'administrador',
-      password: 'Te$91827364'
-    }
-  },
-  options: {
-    encrypt: true,
-    database: 'PoliticalPowerDataBase'
-  }
-};
+var config = require('tedious').Connection;  
+    var dbConfig = {  
+        server: 'basedatospoliticalpower.database.windows.net',  
+        authentication: {
+            type: 'default',
+            options: {
+                userName: 'administrador', 
+                password: 'Te$91827364'  
+            }
+        },
+        options: {
+            // Microsoft Azure so we need encryption:
+            //encrypt: true,
+            database: 'PoliticalPowerDataBase'
+        }
+    }; 
 
-const connection = new Connection(dbConfig);
-connection.on('connect', (err) => {
-  if (err) {
-    console.error('Database connection error:', err);
-  } else {
-    console.log('Connected');
-  }
-});
+var connection = new Connection(dbConfig);  
+connection.on('connect', function(err) {  
+    // If no error, then good to proceed.  
+    console.log("Connected");  
+    // executeStatement();  
+}); 
 
 connection.connect();
 
 // Login route
-app.post('http://poder-politico-tc-2005-b-8dy6.vercel.app/api/login', (req, res) => {
+app.post('/api/login', (req, res) => {
   const { email, password } = req.body;
 
   const connection = new Connection(dbConfig);
+
   connection.on('connect', (err) => {
     if (err) {
       console.error('Database connection error:', err);
@@ -61,7 +63,7 @@ app.post('http://poder-politico-tc-2005-b-8dy6.vercel.app/api/login', (req, res)
         console.error('SQL error:', err);
         return res.status(500).json({ message: 'Internal server error' });
       }
-
+      
       if (rowCount > 0) {
         res.json({ message: 'Login successful' });
       } else {
@@ -80,17 +82,18 @@ app.post('http://poder-politico-tc-2005-b-8dy6.vercel.app/api/login', (req, res)
 });
 
 // Register route
-app.post('http://poder-politico-tc-2005-b-8dy6.vercel.app/api/register', (req, res) => {
+app.post('/api/register', (req, res) => {
   const { name, email, password } = req.body;
 
   const connection = new Connection(dbConfig);
+
   connection.on('connect', (err) => {
     if (err) {
       console.error('Database connection error:', err);
       return res.status(500).json({ message: 'Internal server error' });
     }
 
-    const query = 'INSERT INTO Usuarios (nombre, contrasenia, correo) VALUES (@nombre, @contrasenia, @correo)';
+    const query = 'INSERT INTO Usuarios (nombre, contrasenia, correo) VALUES ( @nombre, @contrasenia, @correo) ';
     const request = new Request(query, (err) => {
       if (err) {
         console.error('SQL error:', err);
@@ -111,4 +114,40 @@ app.post('http://poder-politico-tc-2005-b-8dy6.vercel.app/api/register', (req, r
   connection.connect();
 });
 
-module.exports = app;
+// Add a new endpoint to fetch data from the database into AI component
+app.get('/api/chartdata', (req, res) => {
+  const query = 'SELECT CandidatosPresidenciales.nombreCandidato AS nombre_candidato FROM EleccionCandidatos JOIN CandidatosPresidenciales ON EleccionCandidatos.idCandidato = CandidatosPresidenciales.idCandidato'; 
+
+  const connection = new Connection(dbConfig);
+
+    connection.on('connect', (err) => {
+        if (err) {
+            console.error('Database connection error:', err);
+            return res.status(500).json({ message: 'Internal server error' });
+        }
+
+        const request = new Request(query, (err, rowCount, rows) => {
+            if (err) {
+                console.error('SQL error:', err);
+                return res.status(500).json({ message: 'Internal server error' });
+            }
+
+            const data = rows.map(row => ({
+                label: row[0].value, // Adjust index based on your query result
+                value: row[1].value // Adjust index based on your query result
+            }));
+
+            res.json(data);
+            connection.close();
+        });
+
+        connection.execSql(request);
+    });
+
+    connection.connect();
+});
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
