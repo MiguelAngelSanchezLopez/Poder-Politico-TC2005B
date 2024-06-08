@@ -169,9 +169,9 @@ async function run() {
   const prompt = "What's different between these pictures?";
 
   const imageParts = [
-    fileToGenerativePart('/Users/miguelangelsanchezlopez/Documents/GitHub/Poder-Politico-TC2005B/src/images/candidata-fuerzycorazonxmexico-xochitl-presidencial.jpg', "image/jpg"),
-    fileToGenerativePart('/Users/miguelangelsanchezlopez/Documents/GitHub/Poder-Politico-TC2005B/src/images/candidata-morena-sheinbaum-presidencial.jpg', "image/jpg"),
-    fileToGenerativePart('/Users/miguelangelsanchezlopez/Documents/GitHub/Poder-Politico-TC2005B/src/images/candidato-mc-maynez-presidencial.jpg', "image/jpg")
+    //fileToGenerativePart('/Users/miguelangelsanchezlopez/Documents/GitHub/Poder-Politico-TC2005B/src/images/candidata-fuerzycorazonxmexico-xochitl-presidencial.jpg', "image/jpg"),
+    //fileToGenerativePart('/Users/miguelangelsanchezlopez/Documents/GitHub/Poder-Politico-TC2005B/src/images/candidata-morena-sheinbaum-presidencial.jpg', "image/jpg"),
+    //fileToGenerativePart('/Users/miguelangelsanchezlopez/Documents/GitHub/Poder-Politico-TC2005B/src/images/candidato-mc-maynez-presidencial.jpg', "image/jpg")
   ];
 
   const result = await model.generateContent([prompt, ...imageParts]);
