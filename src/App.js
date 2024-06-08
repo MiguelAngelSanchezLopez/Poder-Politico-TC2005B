@@ -57,11 +57,10 @@ function AppContent() {
           </div>
         ) : (
           <>
-            <button><a href='https://peltre.itch.io/political-power'>Get started the game!</a></button>
+            <button className='start-game'><a href='https://peltre.itch.io/political-power'>Get started the game!</a></button>
             <div className='data-ai'> 
               <div className='interpretacion-AI'> <InterpretacionGrafica /> </div> 
               <div className='data-chart'>
-                <h1>Data from MS SQL Server</h1>
                 <Chart />
                 </div>
             </div> 

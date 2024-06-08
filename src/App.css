@@ -102,6 +102,7 @@ main.App-Main-Content button {
   background-color: #44475a; /* Dracula selection */
   color: #f8f8f2; /* Dracula foreground */
 }
+
 .login-register-container {
   width: 100%;
   min-height: 40vh;
@@ -109,7 +110,7 @@ main.App-Main-Content button {
   display: flex;
   flex-direction: row; /* Keep side-by-side layout */
   justify-content: center; /* Center the content horizontally */
-  align-items: flex-start; /* Align items to the top */
+  align-items: stretch; /* Ensure containers stretch to the same height */
   gap: 20px; /* Add some space between the two divs */
   padding: 20px;
 }
@@ -121,6 +122,9 @@ main.App-Main-Content button {
   padding: 20px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); 
   border-radius: 10px; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Ensure content is centered vertically */
 }
 
 @media (max-width: 768px) {
@@ -135,6 +139,7 @@ main.App-Main-Content button {
     max-width: 400px; /* Optional: Limit the max width for better readability */
   }
 }
+
 /* FOOTER */
 .App-footer {
   min-height: 15vh; /* Ensure height is defined */
