@@ -210,6 +210,16 @@ app.post('/api/interpret-images', async (req, res) => {
   }
 });
 
+app.get('/api/data', async (req, res) => {
+  try {
+      await sql.connect(config);
+      const result = await sql.query`SELECT * FROM Eleccion_Candidato`;
+      res.json(result.recordset);
+  } catch (err) {
+      res.status(500).send({ message: err.message });
+  }
+});
+
 
 // Start the server
 app.listen(PORT, () => {

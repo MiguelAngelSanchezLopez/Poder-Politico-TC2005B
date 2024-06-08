@@ -1,10 +1,12 @@
-/* App.css */
-/* General */
+/* App.css - Dracula Theme */
 
+/* General */
 .App {
   text-align: center;
   display: flex;
   flex-direction: column;
+  background-color: #282a36; /* Dracula background */
+  color: #f8f8f2; /* Dracula foreground */
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -14,19 +16,18 @@
 }
 
 /* HEADER */
-
 .App-header {
-  background-color: #21355c; /* Add background color */
-  border-bottom: 2px solid #21355c;
-  min-height: 10vh; /* Increase height for better visibility */
+  background-color: #44475a; /* Dracula selection */
+  border-bottom: 2px solid #44475a;
+  min-height: 10vh;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between; /* Distribute space between elements */
-  padding: 0 20px; /* Add horizontal padding */
+  justify-content: space-between;
+  padding: 0 20px;
   font-family: 'Roboto', sans-serif;
   font-size: calc(10px + 2vmin);
-  color: #f9f9f9; /* Correct color code */
+  color: #f8f8f2;
 }
 
 header.App-header .logo {
@@ -34,38 +35,23 @@ header.App-header .logo {
   font-weight: bold;
 }
 
-header.App-header nav {
-  display: flex;
-  align-items: center;
-}
-
 header.App-header nav a {
-  color: #f9f9f9;
-  text-decoration: none;
-  margin: 0 10px;
-  font-size: calc(8px + 2vmin);
-  transition: color 0.3s;
+  color: #f8f8f2;
 }
 
 header.App-header nav a:hover {
-  color: #00BFFF; /* Change color on hover */
+  color: #6272a4; /* Dracula comment */
 }
 
 header.App-header button {
-  font-size: calc(5px + 2vmin);
-  color: #21355c;
-  background-color: #ffffff;
-  border: 2px solid white; 
-  border-radius: 20px;
-  padding: 10px 20px;
-  margin: 0 15px;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s; 
+  background-color: #bd93f9; /* Dracula purple */
+  color: #282a36; /* Dracula background */
+  border: 2px solid #bd93f9;
 }
 
 header.App-header button:hover {
-  background-color: #00BFFF;
-  color: #21355c;
+  background-color: #ff79c6; /* Dracula pink */
+  color: #282a36;
 }
 
 .logout-container {
@@ -75,34 +61,13 @@ header.App-header button:hover {
 }
 
 .logout-button {
-  background-color: #ff4d4d;
-  border: none;
+  background-color: #ff5555; /* Dracula red */
   color: white;
-  padding: 10px 20px;
-  font-size: 1em;
-  cursor: pointer;
-}
-
-
-@media (max-width: 768px) {
-  .App-header {
-    flex-direction: column;
-    align-items: flex-start; 
-  }
-
-  header.App-header nav {
-    margin-top: 10px; 
-  }
-
-  header.App-header button {
-    margin-top: 10px; 
-  }
 }
 
 /* MAIN */
-
 .App-Main-Content {
-  background-color: f9f9f9;
+  background-color: #282a36; /* Dracula background */
   min-height: 80vh;
   display: flex;
   flex-direction: column;
@@ -110,70 +75,39 @@ header.App-header button:hover {
   justify-content: center;
   padding: 20px;
   font-size: calc(10px + 2vmin);
-  color: #21355c;
+  color: #f8f8f2; /* Dracula foreground */
 }
 
-.main-game {
-  width: 90%;
-  /* width: 300px; */
-  height: auto;
-  border-radius: 20px;
-}
-
+.main-game,
 .main-game-logged-in {
-  width: 150px;
+  width: 90%;
+  border-radius: 20px;
 }
 
 .game-start-button {
-  margin: 20px;
-  padding: 15px 30px;
-  font-size: 1.2em;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  cursor: pointer;
+  background-color: #50fa7b; /* Dracula green */
+  color: #282a36;
 }
 
 .App-Main-Content h2 {
-  align-self: flex-start;
   align-self: center;
 }
 
-.game-section {
-  background-color: f9f9f9;
-  width: 100%;
-  display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
+.game-section,
 .intro {
-  background-color: f9f9f9;
-  width: 100%;
-  min-height: 50vh;
-  display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  background-color: #282a36; /* Dracula background */
 }
 
 main.App-Main-Content button {
-  font-size: calc(5px + 2vmin);
-  color: #21355c;
-  background-color: #f9f9f9;
-  border-radius: 20px;
-  padding: 10px;
-  margin: 15px;
-  width: 15vh;
+  background-color: #44475a; /* Dracula selection */
+  color: #f8f8f2; /* Dracula foreground */
 }
-
 .login-register-container {
   width: 100%;
   min-height: 40vh;
-  background-color: whitesmoke;
+  background-color: #282a36; /* Dracula background */
   display: flex;
-  flex-direction: row; /* Default to row for side-by-side */
+  flex-direction: row; /* Keep side-by-side layout */
   justify-content: center; /* Center the content horizontally */
   align-items: flex-start; /* Align items to the top */
   gap: 20px; /* Add some space between the two divs */
@@ -182,11 +116,11 @@ main.App-Main-Content button {
 
 .login-register-container .right,
 .login-register-container .left {
-  flex: 1; /* Allow the divs to take up equal space */
-  background-color: white; /* Optional: Add background color for better visibility */
+  flex: 1; 
+  background-color: #44475a;
   padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for a subtle effect */
-  border-radius: 10px; /* Optional: Rounded corners */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); 
+  border-radius: 10px; 
 }
 
 @media (max-width: 768px) {
@@ -201,26 +135,17 @@ main.App-Main-Content button {
     max-width: 400px; /* Optional: Limit the max width for better readability */
   }
 }
-
 /* FOOTER */
-
 .App-footer {
-  min-height: 15;
-  
-}
-
-footer.App-footer div {
-  flex: 1;
+  min-height: 15vh; /* Ensure height is defined */
+  background-color: #44475a; /* Dracula selection */
+  color: #f8f8f2; /* Dracula foreground */
 }
 
 footer.App-footer h3 {
-  margin-bottom: 10px;
   font-size: calc(5px + 2vmin);
-  color: #21355c;
 }
 
 .social-icons a {
-  color: white;
-  margin-right: 10px;
-  font-size: 1.5em;
+  color: #6272a4; /* Dracula comment */
 }

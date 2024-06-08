@@ -1,10 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import logo from './PP.jpg';
 import './App.css';
 import Login from './Login.js';
 import Register from './Register.js';
 import { AuthContext, AuthProvider } from './AuthContext';
 import InterpretacionGrafica from './indexai.js'; // Corrected import name
+import Chart from './Chart.js';
+import axios from 'axios';
+
 
 function AppContent() {
   // Session auth and LogOut
@@ -24,6 +27,19 @@ function AppContent() {
   const scrollToRegister = () => {
     registerRef.current.scrollIntoView({ behavior: 'smooth' });
   };
+
+  // Data chart creation 
+  const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios.get('http://localhost:3000/api/data')
+            .then(response => {
+                setData(response.data);
+            })
+            .catch(error => {
+                console.error('There was an error fetching the data!', error);
+            });
+    }, []);
 
   return (
     <div className="App">
@@ -56,7 +72,13 @@ function AppContent() {
         ) : (
           <>
             <button><a href='https://peltre.itch.io/political-power'>Get started the game!</a></button>
-            <div> <InterpretacionGrafica />  </div> {/* Rendering the AI component here */}
+            <div className='data-ai'> 
+              <div className='interpretacion-AI'> <InterpretacionGrafica /> </div> 
+              <div className='data-chart'>
+                <h1>Data from MS SQL Server</h1>
+                <Chart data={data} />
+                </div>
+            </div> 
           </>
         )}
       </main>
