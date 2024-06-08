@@ -4,7 +4,7 @@ import './App.css';
 import Login from './Login.js';
 import Register from './Register.js';
 import { AuthContext, AuthProvider } from './AuthContext';
-import InterpretacionGrafica from './solucionAI.js'; // Corrected import name
+import InterpretacionGrafica from './indexai.js'; // Corrected import name
 
 function AppContent() {
   // Session auth and LogOut
