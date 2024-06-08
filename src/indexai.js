@@ -15,7 +15,7 @@ const InterpretacionGrafica = () => {
                     '/Users/miguelangelsanchezlopez/Documents/GitHub/Poder-Politico-TC2005B/src/images/candidato-mc-maynez-presidencial.jpg',
                     '/Users/miguelangelsanchezlopez/Documents/GitHub/Poder-Politico-TC2005B/src/images/Pie-Charts.jpg'
                 ]; // Ajusta las rutas según sea necesario
-                const PROMPT = "What's different between these pictures?";
+                const PROMPT = "What can you interpret from the pie chart?";
 
                 // Realizar la solicitud a tu backend para interpretar las imágenes
                 const response = await axios.post(
@@ -49,7 +49,12 @@ const InterpretacionGrafica = () => {
     return (
         <div>
             <h1>Interpretación de Gráfica</h1>
-            {loading ? <p>Cargando...</p> : error ? <p>Error: {error}</p> : <p>{responseText}</p>}
+            {loading ? <p>Cargando...</p> : error ? <p>Error: {error}</p> : (
+                <>
+                    <img src="./src/images/Pie-Charts.jpg" alt="Pie Chart" />
+                    <p>{responseText}</p>
+                </>
+            )}
         </div>
     );
 };
