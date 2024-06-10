@@ -84,7 +84,7 @@ header.App-header button:hover {
   border-radius: 20px;
 }
 
-.game-start-button {
+.start-game {
   background-color: #50fa7b; /* Dracula green */
   color: #282a36;
   width: 20%;
