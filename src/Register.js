@@ -9,13 +9,16 @@ function Register() {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         setError('');
         setSuccess('');
+        
 
         try {
-            const response = await fetch('http://localhost:3000/api/register', {
+            const response = await fetch(`${apiUrl}/api/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -3,9 +3,11 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const morgan = require('morgan');
 const { Connection, Request, TYPES } = require('tedious');
+//require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
+// const REACT_APP_API_URL= 'https://poder-politico-tc-2005-b-8dy6.vercel.app';
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const fs = require("fs");
 const API_KEY = 'AIzaSyCtn7lNbzVQusWCB3WCxz66FkQkCxA8Shs'
@@ -15,8 +17,13 @@ const genAI = new GoogleGenerativeAI(API_KEY);
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ limit: '50mb' }));
-app.use(cors());
 app.use(morgan('dev'));
+app.use(cors({
+  origin: 'https://poder-politico-tc-2005-b-8dy6.vercel.app', // Replace with your frontend URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}));
+
 
 // Test route
 app.get('/', (req, res) => {

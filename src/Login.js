@@ -9,12 +9,14 @@ function Login() {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
 
+    const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         setError('');
         
         try {
-            const response = await fetch('http://localhost:3000/api/login', {
+            const response = await fetch(`${apiUrl}/api/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
