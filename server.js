@@ -6,7 +6,7 @@ const { Connection, Request, TYPES } = require('tedious');
 //require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000 ;
 // const REACT_APP_API_URL= 'https://poder-politico-tc-2005-b-8dy6.vercel.app';
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const fs = require("fs");
