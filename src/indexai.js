@@ -5,7 +5,7 @@ import axios from 'axios';
 import Xochitl from '../src/images/candidata-fuerzycorazonxmexico-xochitl-presidencial.jpg';
 import Claudia from '../src/images/candidata-morena-sheinbaum-presidencial.jpg';
 import Maynez from '../src/images/candidato-mc-maynez-presidencial.jpg';
-import PieChart from '../src/images/Pie-Charts.jpg';
+//import PieChart from '../src/images/Pie-Charts.jpg';
 
 const InterpretacionGrafica = () => {
   const [responseText, setResponseText] = useState('');
@@ -53,7 +53,7 @@ const InterpretacionGrafica = () => {
         <img src={Xochitl} alt="Xochitl" style={{ width: '200px', height: 'auto', marginRight: '10px' }} />
         <img src={Claudia} alt="Claudia" style={{ width: '200px', height: 'auto', marginRight: '10px' }} />
         <img src={Maynez} alt="Maynez" style={{ width: '200px', height: 'auto', marginRight: '10px' }} />
-        <img src={PieChart} alt="Pie Chart" style={{ width: '200px', height: 'auto' }} />
+        {/* <img src={PieChart} alt="Pie Chart" style={{ width: '200px', height: 'auto' }} /> */}
       </div>
 
       <p>{responseText}</p>

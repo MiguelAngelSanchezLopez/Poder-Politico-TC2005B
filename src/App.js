@@ -60,9 +60,9 @@ function AppContent() {
             <button className='start-game'><a href='https://peltre.itch.io/political-power'>Get started the game!</a></button>
             <div className='data-ai'> 
               <div className='interpretacion-AI'> <InterpretacionGrafica /> </div> 
-              <div className='data-chart'>
+              {/* <div className='data-chart'>
                 <Chart />
-                </div>
+                </div> */}
             </div> 
           </>
         )}
