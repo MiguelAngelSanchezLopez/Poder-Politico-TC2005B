@@ -14,7 +14,7 @@ const genAI = new GoogleGenerativeAI(API_KEY);
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: '50mb' }));
 app.use(cors());
 app.use(morgan('dev'));
 
@@ -119,39 +119,6 @@ app.post('/api/register', (req, res) => {
   connection.connect();
 });
 
-// Add a new endpoint to fetch data from the database into AI component
-app.get('/api/chartdata', (req, res) => {
-  const query = 'SELECT CandidatosPresidenciales.nombreCandidato AS nombre_candidato FROM EleccionCandidatos JOIN CandidatosPresidenciales ON EleccionCandidatos.idCandidato = CandidatosPresidenciales.idCandidato'; 
-
-  const connection = new Connection(dbConfig);
-
-    connection.on('connect', (err) => {
-        if (err) {
-            console.error('Database connection error:', err);
-            return res.status(500).json({ message: 'Internal server error' });
-        }
-
-        const request = new Request(query, (err, rowCount, rows) => {
-            if (err) {
-                console.error('SQL error:', err);
-                return res.status(500).json({ message: 'Internal server error' });
-            }
-
-            const data = rows.map(row => ({
-                label: row[0].value, // Adjust index based on your query result
-                value: row[1].value // Adjust index based on your query result
-            }));
-
-            res.json(data);
-            connection.close();
-        });
-
-        connection.execSql(request);
-    });
-
-    connection.connect();
-});
-
 // Converts local file information to a GoogleGenerativeAI.Part object.
 function fileToGenerativePart(path, mimeType) {
   return {
@@ -165,19 +132,18 @@ function fileToGenerativePart(path, mimeType) {
 async function run() {
   // The Gemini 1.5 models are versatile and work with both text-only and multimodal prompts
   const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-
-  const prompt = "What's different between these pictures?";
+  const prompt = "Do you know who are these mexican politicians are? What's different between these pictures?";
 
   const imageParts = [
-    //fileToGenerativePart('/Users/miguelangelsanchezlopez/Documents/GitHub/Poder-Politico-TC2005B/src/images/candidata-fuerzycorazonxmexico-xochitl-presidencial.jpg', "image/jpg"),
-    //fileToGenerativePart('/Users/miguelangelsanchezlopez/Documents/GitHub/Poder-Politico-TC2005B/src/images/candidata-morena-sheinbaum-presidencial.jpg', "image/jpg"),
-    //fileToGenerativePart('/Users/miguelangelsanchezlopez/Documents/GitHub/Poder-Politico-TC2005B/src/images/candidato-mc-maynez-presidencial.jpg', "image/jpg")
+    fileToGenerativePart('./src/images/candidata-fuerzycorazonxmexico-xochitl-presidencial.jpg', "image/jpg"),
+    fileToGenerativePart('./src/images/candidata-morena-sheinbaum-presidencial.jpg', "image/jpg"),
+    fileToGenerativePart('./src/images/candidato-mc-maynez-presidencial.jpg', "image/jpg")
   ];
 
   const result = await model.generateContent([prompt, ...imageParts]);
   const response = await result.response;
-  const text = response.text();
-  console.log(text);
+  const texto = response.text();
+  console.log(texto);
 }
 
 run();
@@ -190,8 +156,8 @@ app.post('/api/interpret-images', async (req, res) => {
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
       const imageParts = imagePaths.map(imagePath => {
-          const imageBuffer = fs.readFileSync(imagePath);
-          const imageBase64 = Buffer.from(imageBuffer).toString('base64');
+        const imageBuffer = fs.readFileSync(imagePath.replace('src/', ''));
+        const imageBase64 = Buffer.from(imageBuffer).toString('base64');
           return {
               inlineData: {
                   data: imageBase64,
@@ -210,15 +176,46 @@ app.post('/api/interpret-images', async (req, res) => {
   }
 });
 
-app.get('/api/data', async (req, res) => {
-  try {
-      await sql.connect(config);
-      const result = await sql.query`SELECT * FROM EleccionCandidatos`;
-      res.json(result.recordset);
-  } catch (err) {
-      res.status(500).send({ message: err.message });
-  }
+// Endpoint to fetch data from MySQL database
+app.get('/api/data', (req, res) => {
+  const connection = mysql.createConnection(dbConfig);
+
+  connection.connect((err) => {
+    if (err) {
+      console.error('Database connection error:', err);
+      return res.status(500).json({ message: 'Internal server error' });
+    }
+
+    const sql = `
+      SELECT CP.ApellidoCandidato, COUNT(*) AS TotalVotos 
+      FROM EleccionCandidatos EC 
+      JOIN CandidatosPresidenciales CP ON EC.idCandidato = CP.idCandidato 
+      GROUP BY CP.ApellidoCandidato
+      ORDER BY TotalVotos DESC
+    `;
+
+    connection.query(sql, (err, results) => {
+      if (err) {
+        console.error('SQL error:', err);
+        return res.status(500).json({ message: 'Internal server error' });
+      }
+
+      res.json(results);
+    });
+
+    connection.end();
+  });
 });
+
+
+  //const sql = 'SELECT CP.ApellidoCndidato, COUNT(*) AS TotalVotos FROM EleccionCandidtos EC JOIN CandidatosPresidenciales CP ON EC.idCandidato = CP.idCandidato';
+  // db.query(sql, (err, result) => {
+  //   if (err) {
+  //     res.status(500).json({ error: 'Error fetching data from database' });
+  //     return;
+  //   }
+  //   res.json(result);
+  // });
 
 
 // Start the server

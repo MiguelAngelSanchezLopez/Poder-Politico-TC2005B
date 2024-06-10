@@ -1,39 +1,86 @@
-// src/Chart.js
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { Bar } from 'react-chartjs-2';
 
 const Chart = () => {
-    const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        axios.get('http://localhost:3000/api/data')
-            .then(response => {
-                setData(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching data:', error);
-            });
-    }, []); // Empty dependency array ensures useEffect runs once on component mount
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/api/data');
+        setData(response.data);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        setError('Error fetching data');
+      }
+    };
 
-    return (
-        <div className="chart-container">
-            <h1>Data from MS SQL Server</h1>
-            <LineChart
-                width={500}
-                height={300}
-                data={data}
-                margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
-            >
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="name" />
-                <YAxis />
-                <Tooltip />
-                <Legend />
-                <Line type="monotone" dataKey="value" stroke="#8884d8" />
-            </LineChart>
-        </div>
-    );
+    fetchData();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  // Prepare data for chart
+  const chartData = {
+    labels: data.map(row => row.ApellidoCandidato),
+    datasets: [
+      {
+        label: 'Total Votes',
+        backgroundColor: 'rgba(75,192,192,0.2)',
+        borderColor: 'rgba(75,192,192,1)',
+        borderWidth: 1,
+        hoverBackgroundColor: 'rgba(75,192,192,0.4)',
+        hoverBorderColor: 'rgba(75,192,192,1)',
+        data: data.map(row => row.TotalVotos)
+      }
+    ]
+  };
+
+  return (
+    <div>
+      <h1>Data Table and Column Chart</h1>
+
+      {/* Column Chart */}
+      <div style={{ height: '400px', marginBottom: '20px' }}>
+        <Bar
+          data={chartData}
+          options={{
+            maintainAspectRatio: false,
+            scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
+          }}
+        />
+      </div>
+
+      {/* Data Table */}
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Total Votes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((row, index) => (
+            <tr key={index}>
+              <td>{row.ApellidoCandidato}</td>
+              <td>{row.TotalVotos}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
 };
 
 export default Chart;

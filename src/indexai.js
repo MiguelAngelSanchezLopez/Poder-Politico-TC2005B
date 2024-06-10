@@ -1,66 +1,64 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+// Import images as modules
+import Xochitl from '../src/images/candidata-fuerzycorazonxmexico-xochitl-presidencial.jpg';
+import Claudia from '../src/images/candidata-morena-sheinbaum-presidencial.jpg';
+import Maynez from '../src/images/candidato-mc-maynez-presidencial.jpg';
+import PieChart from '../src/images/Pie-Charts.jpg';
+
 const InterpretacionGrafica = () => {
-    const [responseText, setResponseText] = useState('');
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const [responseText, setResponseText] = useState('');
+  const [text, setText] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const interpretImages = async () => {
-            try {
-                const IMAGE_PATHS = [
-                    '/Users/miguelangelsanchezlopez/Documents/GitHub/Poder-Politico-TC2005B/src/images/candidata-fuerzycorazonxmexico-xochitl-presidencial.jpg',
-                    '/Users/miguelangelsanchezlopez/Documents/GitHub/Poder-Politico-TC2005B/src/images/candidata-morena-sheinbaum-presidencial.jpg',
-                    '/Users/miguelangelsanchezlopez/Documents/GitHub/Poder-Politico-TC2005B/src/images/candidato-mc-maynez-presidencial.jpg',
-                    '/Users/miguelangelsanchezlopez/Documents/GitHub/Poder-Politico-TC2005B/src/images/Pie-Charts.jpg'
-                ]; // Ajusta las rutas según sea necesario
-                const PROMPT = "What can you interpret from the pie chart?";
+  useEffect(() => {
+    const interpretImages = async () => {
+      try {
+        // Simulate AI interpretation response (replace with actual logic if needed)
+        const interpretedText = "The AI interpreted the images.";
+        const response = await fetch('http://localhost:3000/api/interpret-images', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ text }),
+        });
 
-                // Realizar la solicitud a tu backend para interpretar las imágenes
-                const response = await axios.post(
-                    'http://localhost:3000/api/interpret-images', // Asegúrate de que la URL coincida con tu configuración del servidor
-                    {
-                        imagePaths: IMAGE_PATHS,
-                        prompt: PROMPT,
-                    }
-                );
+        const data = await response.json();
 
-                setResponseText(response.data.text);
-                setLoading(false);
-            } catch (error) {
-                setLoading(false);
-                if (error.response) {
-                    // El servidor respondió con un estado fuera del rango 2xx
-                    setError(`Error en la respuesta del servidor: ${error.response.data.message}`);
-                } else if (error.request) {
-                    // La solicitud fue hecha pero no se recibió respuesta
-                    setError('No se recibió respuesta del servidor.');
-                } else {
-                    // Algo sucedió al configurar la solicitud que desencadenó un error
-                    setError(`Error al configurar la solicitud: ${error.message}`);
-                }
-            }
-        };
 
-        interpretImages();
-    }, []);
+        // Update state with interpreted text
+        setResponseText(text);
+        setLoading(false);
+      } catch (error) {
+        setLoading(false);
+        setError(`Error interpreting images: ${error.message}`);
+      }
+    };
 
-    return (
-        <div>
-            <h1>Interpretación de Gráfica</h1>
-            {loading ? <p>Cargando...</p> : error ? <p>Error: {error}</p> : (
-                <>
-                    <img src="./src/images/Pie-Charts.jpg" alt="Pie Chart" />
-                    <p>{responseText}</p>
-                </>
-            )}
-        </div>
-    );
+    interpretImages();
+  }, []);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
+  return (
+    <div>
+      <h1>Interpretación Gráfica</h1>
+      
+      {/* Display imported images */}
+      <div>
+        <img src={Xochitl} alt="Xochitl" style={{ width: '200px', height: 'auto', marginRight: '10px' }} />
+        <img src={Claudia} alt="Claudia" style={{ width: '200px', height: 'auto', marginRight: '10px' }} />
+        <img src={Maynez} alt="Maynez" style={{ width: '200px', height: 'auto', marginRight: '10px' }} />
+        <img src={PieChart} alt="Pie Chart" style={{ width: '200px', height: 'auto' }} />
+      </div>
+
+      <p>{responseText}</p>
+    </div>
+  );
 };
 
 export default InterpretacionGrafica;
-
-
-
-
