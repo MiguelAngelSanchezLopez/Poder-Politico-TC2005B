@@ -6,8 +6,7 @@ const { Connection, Request, TYPES } = require('tedious');
 require('dotenv').config();
 
 const app = express();
-const PORT = process.env.PORT;
-// const REACT_APP_API_URL= 'https://poder-politico-tc-2005-b-8dy6.vercel.app/';
+const PORT = process.env.PORT || 3000;
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const fs = require("fs");
 const API_KEY = 'AIzaSyCtn7lNbzVQusWCB3WCxz66FkQkCxA8Shs'
@@ -19,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json({ limit: '50mb' }));
 app.use(morgan('dev'));
 app.use(cors({
-  origin: process.env.FRONTEND_URL, 
+  origin: process.env.REACT_APP_API_URL, 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
