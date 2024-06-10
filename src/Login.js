@@ -8,6 +8,7 @@ function Login() {
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
+    require('dotenv').config();
 
     const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3000';
 
