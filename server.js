@@ -26,7 +26,7 @@ app.use(cors({
 
 // Test route
 app.get('/', (req, res) => {
-  res.send('Hello, this is my Express server!');
+  res.send('Express on Vercel!');
 });
 
 // MS SQL Server configuration
@@ -223,7 +223,7 @@ app.get('/api/data', (req, res) => {
   //   res.json(result);
   // });
 
-
+module.exports = app;
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
