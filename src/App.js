@@ -3,7 +3,7 @@ import logo from './PP.jpg';
 import './App.css';
 import Login from './Login.js';
 import Register from './Register.js';
-import Chart from './Chart.js';
+//import Chart from './Chart.js';
 import { AuthContext, AuthProvider } from './AuthContext';
 import InterpretacionGrafica from './indexai.js'; // Corrected import name
 
